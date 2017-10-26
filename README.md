@@ -9,4 +9,12 @@ $ docker run --rm -e PARA_APP_NAME=scoold -e PARA_PORT=8000 -e PARA_ENDPOINT=htt
 
 ## Configuration
 
+```
+FROM	lufia/scoold:latest
+
+ADD	access_key secret_key /app/
+ENV	ACCESS_KEY_PATH=/app/access_key
+	SECRET_KEY_PATH=/app/secret_key
+```
+
 TODO
