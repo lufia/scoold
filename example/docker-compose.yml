@@ -1,0 +1,40 @@
+version: '2'
+services:
+  para:
+    build: lufia/para:latest
+    restart: always
+    environment:
+      - PARA_APP_NAME=scoold
+      - PARA_APP_SECRET_KEY=hogehoge
+  parasetup:
+    build: ./parasetup
+    volumes:
+      - share:/var/lib/para
+    links:
+      - para:para
+    restart: on-failure
+    environment:
+      - ACCESS_KEY_PATH=/var/lib/para/access_key
+      - SECRET_KEY_PATH=/var/lib/para/secret_key
+  scoold:
+    image: lufia/scoold:latest
+    volumes:
+      - share:/var/lib/para
+    links:
+      - para:para
+    ports:
+      - "8000:8000"
+    restart: always
+    environment:
+      - SECRET_KEY_PATH=/var/lib/para/secret_key
+      - ACCESS_KEY_PATH=/var/lib/para/access_key
+      - PARA_APP_NAME=scoold
+      - PARA_PORT=8000
+      - PARA_ENV=production
+      - PARA_HOST_URL=http://localhost
+      - PARA_ENDPOINT=http://para:8080
+      - PARA_PASSWORD_AUTH_ENABLED=true
+      - PARA_CODE_HIGHLIGHTING_ENABLED=true
+volumes:
+  share:
+    driver: local
