@@ -26,7 +26,7 @@ function get_key()
 echo "para.access_key = \"$(cat $ACCESS_KEY_PATH)\"" >>$config
 echo "para.secret_key = \"$(cat $SECRET_KEY_PATH)\"" >>$config
 
-env | sed -n '/^PARA_/s/=.*//p' | while read v
+env | sed -n '/^PARA_/s/=.*//p' | sort | while read v
 do
 	if [[ " ${disabled_vars[@]} " =~ " $v " ]]
 	then
