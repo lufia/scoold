@@ -1,6 +1,8 @@
 # scoold
 Dockernized [Scoold](https://github.com/Erudika/scoold)
 
+**I recommend to use official Docker image: [erudikaltd/scoold](https://hub.docker.com/r/erudikaltd/scoold/)**
+
 ## Use
 
 ```console
